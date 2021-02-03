@@ -57,8 +57,8 @@ function createVotingBooth() {
     // Convert internals.
     booth.innerHTML = `
     <div class="text">
-        <h1 id="voteheading">VOTE</h1>
-        <h2>Select the candidate you would like to vote for:</h2>
+        <h1>VOTE</h1>
+        <h2 id="voteheading">Select the candidate you would like to vote for:</h2>
     </div>
     <div class="buttonContainer" id="buttonContainer">
         <div class="button" id="nixon">
@@ -212,6 +212,9 @@ function itsGoofyTime() {
 // Get the button to run from the mouse.
 function initiateRun() {
     document.addEventListener("mousemove", mouseControl);
+    let button = document.getElementById("mcgovern")
+    button.addEventListener("mouseover", endButtonMove);
+    button.style.left = 0 + "px";
 }
 function mouseControl (e) {
     let button = document.getElementById("mcgovern");
@@ -220,15 +223,20 @@ function mouseControl (e) {
 
     button.style.position = "absolute";
     button.style.transition = "none";
-    button.style.left = e.clientX + 15 + "px";
-    button.style.top = window.innerWidth / 2;
+    button.style.left = e.clientX + 30 + "px";
+    button.style.top = e.clientY + 30 + "px";
 
-    if (buttonRect.left + buttonRect.width > boothRect.right - 20) {
+    if (buttonRect.right > boothRect.right) {
         button.style.left = boothRect.right - 20 - buttonRect.width + "px";
     }
+    if (buttonRect.bottom > boothRect.bottom) {
+        button.style.top = boothRect.bottom - 20 - buttonRect.width + "px";
+    }
+}
+function endButtonMove() {
+    document.removeEventListener("mousemove", mouseControl);
 }
 function endRun() {
-    document.removeEventListener("mousemove", mouseControl);
     let button = document.getElementById("mcgovern");
     button.style = "";
 }
