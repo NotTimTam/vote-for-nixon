@@ -194,13 +194,20 @@ function itsGoofyTime() {
             voteHeading.innerText = "😑";
             for (let i = 0; i <= 10; i++) {
                 let button = document.createElement("div");
-                button.class = "button";
-                button.id = "nixon temp-nixon";
+                button.classList.add("button");
+                button.classList.add("delete");
                 button.innerText = "george s. mcgovern";
                 document.getElementById("buttonContainer").appendChild(button);
+                button.addEventListener("click", function (e) {
+                    this.parentNode.removeChild(this);
+                });
             }
             break;
         case 14:
+            let buttonsToDelete = document.getElementsByClassName("delete");
+            for (let i = 0; i < buttonsToDelete.length; i++) {
+                buttonsToDelete[i].destroy();
+            }
             voteHeading.innerText = "Final vote check. Pick the candidate you believe is right for our country.";
             break;
         default:
@@ -215,6 +222,16 @@ function initiateRun() {
     let button = document.getElementById("mcgovern")
     button.addEventListener("mouseover", endButtonMove);
     button.style.left = 0 + "px";
+
+    let secretText = document.createElement("p");
+    secretText.innerText = "- Shake your mouse fast!";
+    secretText.style.fontSize = "8px";
+    secretText.id = "secretText";
+    secretText.style.position = "absolute";
+    secretText.style.bottom = "60px";
+    secretText.style.left = "130px";
+    secretText.style.color = "black";
+    document.getElementById("images").appendChild(secretText);
 }
 function mouseControl (e) {
     let button = document.getElementById("mcgovern");
@@ -225,13 +242,6 @@ function mouseControl (e) {
     button.style.transition = "none";
     button.style.left = e.clientX + 30 + "px";
     button.style.top = e.clientY + 30 + "px";
-
-    if (buttonRect.right > boothRect.right) {
-        button.style.left = boothRect.right - 20 - buttonRect.width + "px";
-    }
-    if (buttonRect.bottom > boothRect.bottom) {
-        button.style.top = boothRect.bottom - 20 - buttonRect.width + "px";
-    }
 }
 function endButtonMove() {
     document.removeEventListener("mousemove", mouseControl);
@@ -239,4 +249,5 @@ function endButtonMove() {
 function endRun() {
     let button = document.getElementById("mcgovern");
     button.style = "";
+    document.getElementById("secretText").remove();
 }
