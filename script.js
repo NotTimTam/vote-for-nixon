@@ -1,3 +1,26 @@
+window.onload = function() {
+    images.innerHTML = `
+    <img src="images/portrait_mcgovern.png" alt="mcgovern portrait" id="portrait_mcgovern">
+    <img src="images/portrait_nixon.png" alt="nixon portrait" id="portrait_nixon">
+    `
+    document.getElementById("portrait_nixon").addEventListener("mouseover", function (e) {
+        this.src = "images/nixon_thumbs_up.png";
+    });
+    document.getElementById("portrait_nixon").addEventListener("mouseleave", function (e) {
+        this.src = "images/portrait_nixon.png";
+    });
+    document.getElementById("portrait_nixon").addEventListener("click", function (e) {
+        this.src = "images/nixonmad3.png";
+    });
+}
+document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+});
+document.addEventListener("mousemove", function(e) {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+});
+
 // Begin voting button.
 beginVotingButton.addEventListener("click", function (e) {
     flipMachine();
@@ -33,7 +56,7 @@ function createVotingBooth() {
         <h1 id="voteheading">VOTE</h1>
         <h2>Select the candidate you would like to vote for:</h2>
     </div>
-    <div class="buttonContainer">
+    <div class="buttonContainer" id="buttonContainer">
         <div class="button" id="nixon">
             RICHARD M. NIXON
         </div>
@@ -141,28 +164,67 @@ function itsGoofyTime() {
             mcgovernB.classList.toggle("wiggleButton");
             break;
         case 9:
-            voteHeading.innerText = "VOTE NIXON";
+            voteHeading.innerText = "You can't click it now.";
             mcgovernB.classList.toggle("wiggleButton");
+            initiateRun();
+            break;
+        case 10:
+            endRun();
+            voteHeading.innerText = "VOTE NIXON";
             nixonPortrait.src = "images/nixonmad2.png";
             nixonPortrait.style.animationName = "shake";
             nixonPortrait.style.right = "-10px";
             nixonPortrait.style.bottom = "-10px";
             break;
-        case 10:
+        case 11:
             voteHeading.innerText = "I think this is fairly obvious.";
             nixonB.classList.toggle("humongousButton");
             nixonPortrait.style = "";
             nixonPortrait.src = "images/portrait_nixon.png";
             break;
-        case 11:
+        case 12:
             voteHeading.innerText = "😑";
             nixonB.classList.toggle("humongousButton");
             break;
-        case 12:
+        case 13:
+            voteHeading.innerText = "😑";
+            for (let i = 0; i <= 10; i++) {
+                let button = document.createElement("div");
+                button.class = "button";
+                button.id = "nixon temp-nixon";
+                button.innerText = "george s. mcgovern";
+                document.getElementById("buttonContainer").appendChild(button);
+            }
+            break;
+        case 14:
             voteHeading.innerText = "Final vote check. Pick the candidate you believe is right for our country.";
             break;
         default:
             flipMachine();
             break;
     }
+}
+
+// Get the button to run from the mouse.
+function initiateRun() {
+    document.addEventListener("mousemove", mouseControl);
+}
+function mouseControl (e) {
+    let button = document.getElementById("mcgovern");
+    let buttonRect = button.getBoundingClientRect();
+
+    button.style.position = "absolute";
+    button.style.transition = "none";
+    button.style.left = e.clientX + 15 + "px";
+    button.style.top = window.innerWidth / 2;
+
+    if (buttonRect.left + buttonRect.width > window.innerWidth) {
+        console.log("eeee");
+        button.style.left = window.innerWidth - buttonRect.width + "px";
+    }
+}
+function endRun() {
+    document.removeEventListener("mousemove", mouseControl);
+    let button = document.getElementById("mcgovern");
+    button.style = "";
 }
