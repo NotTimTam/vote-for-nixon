@@ -16,27 +16,31 @@ body {
 
     width: 100vw;
     height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 
+h1 {
+    font-size: 4rem;
+}
+
+/* BUTTON STYLING AND ANIMATION */
 .buttonContainer {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    flex-grow: 1;
 }
 
 .button {
-    transition: all 0.1s;
+    transition: all 0.3s;
     border: 5px solid black;
 
     width: fit-content;
@@ -46,34 +50,204 @@ h1, h2, h3, h4, h5, h6, p {
 
     cursor: pointer;
     user-select: none;
+
+    z-index: 3;
+
+    background-color: white;
 }
 .button:hover {
-    transform: translateX(-10px) translateY(-10px);
-    box-shadow: 10px 10px 0px slategray;
+    transform: translateX(-5px) translateY(-5px);
+    box-shadow: 5px 5px 0px slategray;
 }
 .button:active {
     transform: translateX(0px) translateY(0px);
     box-shadow: none;
     background-color: palegreen;
 }
+.bigButton {
+    padding: 30px;
+    font-size: 24px;
+}
+.tinyButton {
+    padding: 0px;
+    font-size: 5px;
+}
+.attentionButton {
+    padding: 30px;
+    animation-name: attention;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes attention {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.wiggleButton {
+    animation-name: wiggle;
+    animation-timing-function: ease-in-out;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+@keyframes wiggle {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-100px) translateY(-100px);
+    }
+    50% {
+        transform: translateX(100px) translateY(-100px);
+    }
+    75% {
+        transform: translateX(100px) translateY(0px);
+    }
+    100% {
+        transform: translateX(0px) translateY(0px);
+    }
+}
+.humongousButton {
+    padding: 100px;
+    font-size: 200px;
+    z-index: 10;
+}
+
+
+#mcgovern:hover {
+    background-color: red;
+}
+#nixon:hover {
+    background-color: green;
+}
+#nixon {
+    padding: 30px;
+}
+#mcgover {
+    padding: 5px;
+}
 
 /* SPECIFIC STYLES */
 .booth {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-
-    border: 20px solid #5c0000;
+    border: 20px solid dodgerblue;
     background-color: white;
     color: black;
 
-    width: 75%;
-    height: 75%;
+    width: 90vh;
+    height: 90vh;
 
     padding: 10px;
 
     text-align: center;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.flip {
+    animation-name: spin;
+    animation-duration: 0.4s;
+}
+@keyframes spin {
+    0% {
+        transform: rotateX(0deg);
+    } 50% {
+        transform: rotateX(90deg);
+    } 100% {
+        transform: rotateX(0deg);
+    }
+}
+
+/* IMAGE STYLING AND ANIMATION */
+img {
+    position: absolute;
+}
+#portrait_nixon {
+    right: 0;
+    bottom: 0;
+    height: 35vw;
+    animation-name: dance;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+#portrait_mcgovern {
+    left: 0;
+    bottom: 0;
+    height: 35vw;
+    animation-name: inverse-dance;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+@keyframes dance {
+    0% {
+        transform: translateY(0px);
+    } 25% {
+        transform: translateY(5px);
+    } 50% {
+        transform: translateY(0px);
+    } 75% {
+        transform: translateY(5px);
+    } 100% {
+        transform: translateY(0px);
+    }
+}
+@keyframes inverse-dance {
+    0% {
+        transform: translateY(5px);
+    } 25% {
+        transform: translateY(0px);
+    } 50% {
+        transform: translateY(5px);
+    } 75% {
+        transform: translateY(0px);
+    } 100% {
+        transform: translateY(5px);
+    }
+}
+#nixon_thumbs {
+    bottom: -40px;
+    left: -20px;
+    animation-name: tilt;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes tilt {
+    0% {
+        transform: rotate(0deg);
+    } 25% {
+        transform: rotate(3deg);
+    } 50% {
+        transform: rotate(0deg);
+    } 75% {
+        transform: rotate(-3deg);
+    } 100% {
+        transform: rotate(0deg);
+    }
+}
+.shake {
+    animation: shake 0.05s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
