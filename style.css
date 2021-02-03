@@ -1,0 +1,79 @@
+/* GENERAL STYLES */
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    background: rgb(6, 0, 182);
+    background: linear-gradient(135deg, rgb(6, 0, 182,1) 25%, rgba(255,0,0,1) 25%, rgba(255,0,0,1) 39%, rgba(255,255,255,1) 39%, rgba(255,255,255,1) 53%, rgba(255,0,0,1) 53%, rgba(255,0,0,1) 67%, rgba(255,0,0,1) 67%, rgba(255,255,255,1) 67%, rgba(255,255,255,1) 81%, rgba(255,0,0,1) 81%, rgba(255,0,0,1) 95%, rgba(255,255,255,1) 95%);
+    background-repeat: no-repeat;
+
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.button {
+    transition: all 0.1s;
+    border: 5px solid black;
+
+    width: fit-content;
+    height: min-content;
+
+    padding: 15px;
+
+    cursor: pointer;
+    user-select: none;
+}
+.button:hover {
+    transform: translateX(-10px) translateY(-10px);
+    box-shadow: 10px 10px 0px slategray;
+}
+.button:active {
+    transform: translateX(0px) translateY(0px);
+    box-shadow: none;
+    background-color: palegreen;
+}
+
+/* SPECIFIC STYLES */
+.booth {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    border: 20px solid #5c0000;
+    background-color: white;
+    color: black;
+
+    width: 75%;
+    height: 75%;
+
+    padding: 10px;
+
+    text-align: center;
+}
