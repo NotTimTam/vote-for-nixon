@@ -3,12 +3,6 @@ window.onload = function() {
     <img src="images/portrait_mcgovern.png" alt="mcgovern portrait" id="portrait_mcgovern">
     <img src="images/portrait_nixon.png" alt="nixon portrait" id="portrait_nixon">
     `
-    document.getElementById("portrait_nixon").addEventListener("mouseover", function (e) {
-        this.src = "images/nixon_thumbs_up.png";
-    });
-    document.getElementById("portrait_nixon").addEventListener("mouseleave", function (e) {
-        this.src = "images/portrait_nixon.png";
-    });
     document.getElementById("portrait_nixon").addEventListener("click", function (e) {
         this.src = "images/nixonmad3.png";
     });
@@ -23,6 +17,12 @@ document.addEventListener('contextmenu', function (e) {
 document.addEventListener("mousemove", function(e) {
     cursor.style.left = e.clientX + "px";
     cursor.style.top = e.clientY + "px";
+});
+document.addEventListener("mouseleave", function (e) {
+    cursor.style.display = "none";
+});
+document.addEventListener("mouseover", function (e) {
+    cursor.style.display = "block";
 });
 
 // Begin voting button.
