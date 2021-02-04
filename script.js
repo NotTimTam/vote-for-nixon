@@ -174,7 +174,7 @@ function itsGoofyTime() {
             break;
         case 10:
             endRun();
-            voteHeading.innerText = "VOTE NIXON";
+            voteHeading.innerText = "VOTE NIXON NOW";
             nixonPortrait.src = "images/nixonmad2.png";
             nixonPortrait.style.animationName = "shake";
             nixonPortrait.style.right = "-80px";
@@ -191,7 +191,7 @@ function itsGoofyTime() {
             nixonB.classList.toggle("humongousButton");
             break;
         case 13:
-            voteHeading.innerText = "😑";
+            voteHeading.innerText = "Don't bother wasting your time.";
             for (let i = 0; i <= 10; i++) {
                 let rand = Math.random();
                 if (rand < 0.5) {
@@ -236,36 +236,35 @@ function itsGoofyTime() {
 
 // Get the button to run from the mouse.
 function initiateRun() {
-    document.addEventListener("mousemove", mouseControl);
-    let button = document.getElementById("mcgovern")
-    button.addEventListener("mouseover", endButtonMove);
-    button.style.left = 0 + "px";
+    window.setInterval(buttonMove, 1);
+    let button = document.getElementById("mcgovern");
+    button.addEventListener("mouseover", endRun);
 
-    let secretText = document.createElement("p");
-    secretText.innerText = "- Shake your mouse fast!";
-    secretText.style.fontSize = "1.5vw";
-    secretText.id = "secretText";
-    secretText.style.position = "absolute";
-    secretText.style.bottom = "17vh";
-    secretText.style.left = "22vw";
-    secretText.style.color = "black";
-    document.getElementById("images").appendChild(secretText);
+    button.style.position = "absolute";
+    button.style.transition = "none";
 }
-function mouseControl (e) {
+function buttonMove () {
     let button = document.getElementById("mcgovern");
     let buttonRect = button.getBoundingClientRect();
     let boothRect = booth.getBoundingClientRect();
 
-    button.style.position = "absolute";
-    button.style.transition = "none";
-    button.style.left = e.clientX + 30 + "px";
-    button.style.top = e.clientY + 30 + "px";
-}
-function endButtonMove() {
-    document.removeEventListener("mousemove", mouseControl);
+    // Move the button right, as well as up or down, and make sure to loop it around the screen.
+    button.style.left = buttonRect.left + 15 + "px";
+    button.style.top = buttonRect.top + (Math.floor(Math.random() * (15 - -15 +1)) + -15) + "px";
+    if (buttonRect.left > window.innerWidth) {
+        button.style.left = 0 - button.clientWidth + "px";
+    }
+    if (buttonRect.top < 0) {
+        button.style.top = window.innerHeight - buttonRect.height + "px";
+    } else if (buttonRect.top + buttonRect.height >= window.innerHeight) {
+        button.style.top = 0 + "px";
+    }
 }
 function endRun() {
+    window.clearInterval(0);
     let button = document.getElementById("mcgovern");
     button.style = "";
     document.getElementById("secretText").remove();
+    button.removeEventListener("mouseover", endRun);
+    button.style.transition = "all 0.1s";
 }
