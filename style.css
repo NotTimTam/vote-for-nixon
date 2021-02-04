@@ -186,7 +186,7 @@ img {
     user-select: none;
 }
 #portrait_nixon {
-    right: 0;
+    right: -1px;
     bottom: 0;
     height: 35vw;
     animation-name: dance;
