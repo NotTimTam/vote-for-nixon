@@ -177,7 +177,7 @@ function itsGoofyTime() {
             voteHeading.innerText = "VOTE NIXON";
             nixonPortrait.src = "images/nixonmad2.png";
             nixonPortrait.style.animationName = "shake";
-            nixonPortrait.style.right = "-10px";
+            nixonPortrait.style.right = "-80px";
             nixonPortrait.style.bottom = "-10px";
             break;
         case 11:
@@ -193,14 +193,30 @@ function itsGoofyTime() {
         case 13:
             voteHeading.innerText = "😑";
             for (let i = 0; i <= 10; i++) {
-                let button = document.createElement("div");
-                button.classList.add("button");
-                button.classList.add("delete");
-                button.innerText = "george s. mcgovern";
-                document.getElementById("buttonContainer").appendChild(button);
-                button.addEventListener("click", function (e) {
-                    this.parentNode.removeChild(this);
-                });
+                let rand = Math.random();
+                if (rand < 0.5) {
+                    let button = document.createElement("div");
+                    button.classList.add("button");
+                    button.classList.add("delete");
+                    button.id = "mcgovern";
+                    button.innerText = "george s. mcgovern";
+                    document.getElementById("buttonContainer").appendChild(button);
+                    button.addEventListener("click", function (e) {
+                        this.parentNode.removeChild(this);
+                    });
+                } else {
+                    let button = document.createElement("div");
+                    button.classList.add("button");
+                    button.classList.add("delete");
+                    button.id = `mcgovern before${i}`;
+                    button.innerText = "george s. mcgovern";
+                    document.getElementById("buttonContainer").appendChild(button);
+                    button.addEventListener("click", function (e) {
+                        this.parentNode.removeChild(this);
+                    });
+                    let buttonContainer = document.getElementById("buttonContainer");
+                    buttonContainer.insertBefore(button, buttonContainer.childNodes[2]);
+                }
             }
             break;
         case 14:
@@ -215,6 +231,8 @@ function itsGoofyTime() {
             break;
     }
 }
+
+// Create fake mcgovern buttons
 
 // Get the button to run from the mouse.
 function initiateRun() {
