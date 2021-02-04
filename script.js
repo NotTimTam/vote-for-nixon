@@ -225,11 +225,11 @@ function initiateRun() {
 
     let secretText = document.createElement("p");
     secretText.innerText = "- Shake your mouse fast!";
-    secretText.style.fontSize = "8px";
+    secretText.style.fontSize = "1.5vw";
     secretText.id = "secretText";
     secretText.style.position = "absolute";
-    secretText.style.bottom = "60px";
-    secretText.style.left = "130px";
+    secretText.style.bottom = "17vh";
+    secretText.style.left = "22vw";
     secretText.style.color = "black";
     document.getElementById("images").appendChild(secretText);
 }
