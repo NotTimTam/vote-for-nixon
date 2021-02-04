@@ -289,10 +289,10 @@ img {
 
     transition: all 0.3s;
 
-    border-bottom: 1px solid black;
+    border-bottom: 3px solid gray;
 }
 #name:hover {
-    border-bottom: 3px solid gray;
+    border-bottom: 3px solid black;
 }
 #name:focus {
     border-bottom: 3px solid dodgerblue;
