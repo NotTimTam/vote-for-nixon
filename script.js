@@ -4,7 +4,7 @@ window.onload = function() {
     <img src="images/portrait_nixon.png" alt="nixon portrait" id="portrait_nixon">
     `
     document.getElementById("portrait_nixon").addEventListener("click", function (e) {
-        this.src = "images/nixonmad3.png";
+        this.src = "images/nixonmad1.png";
     });
 }
 
@@ -208,7 +208,7 @@ function itsGoofyTime() {
                     let button = document.createElement("div");
                     button.classList.add("button");
                     button.classList.add("delete");
-                    button.id = `mcgovern before${i}`;
+                    button.id = `mcgovern`;
                     button.innerText = "george s. mcgovern";
                     document.getElementById("buttonContainer").appendChild(button);
                     button.addEventListener("click", function (e) {

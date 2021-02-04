@@ -194,6 +194,9 @@ img {
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
 }
+#portrait_nixon[src="images/portrait_nixon.png"] {
+    pointer-events: all;
+}
 #portrait_mcgovern {
     left: 0;
     bottom: 0;
@@ -232,6 +235,7 @@ img {
 #nixon_thumbs {
     bottom: -40px;
     left: -20px;
+    height: 25vw;
     animation-name: tilt;
     animation-duration: 1s;
     animation-iteration-count: infinite;
