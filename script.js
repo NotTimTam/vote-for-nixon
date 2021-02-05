@@ -1,5 +1,6 @@
 "use strict";
 
+// Load the images when the page loads, not before it. (this considerably increases loading times)
 window.onload = function() {
     images.innerHTML = `
     <img src="images/portrait_mcgovern.png" alt="mcgovern portrait" id="portrait_mcgovern">
@@ -13,7 +14,7 @@ document.addEventListener('contextmenu', function (e) {
     console.log("Ironic, we didn't find the context...");
 });
 
-// Cursor
+// Custom cursor div events.
 document.addEventListener("mousemove", function(e) {
     cursor.style.left = e.clientX + "px";
     cursor.style.top = e.clientY + "px";
@@ -119,6 +120,7 @@ function createSadNote() {
 // Voting system.
 let voteStep = 0;
 
+// Votes either count up or down the votestep, determining what happens on screen next.
 function nixonVote() {
     voteStep = -1;
     flipMachine();
@@ -127,8 +129,10 @@ function mcgovernVote() {
     voteStep ++;
     itsGoofyTime();
 }
+
+// Modify the environment to trick user into voting for Nixon.
 function itsGoofyTime() {
-    // Modify the environment to trick user into voting for Nixon.
+    // A series of events that slow the user from being able to vote for mcgovern.
     let voteHeading = document.getElementById("voteheading");
     let nixonB = document.getElementById("nixon");
     let mcgovernB = document.getElementById("mcgovern");
@@ -202,7 +206,7 @@ function itsGoofyTime() {
                     button.innerText = "george s. mcgovern";
                     document.getElementById("buttonContainer").appendChild(button);
                     button.addEventListener("click", function (e) {
-                        this.parentNode.removeChild(this);
+                        window.setInterval(endSession, 1000);
                     });
                 } else {
                     let button = document.createElement("div");
@@ -212,7 +216,7 @@ function itsGoofyTime() {
                     button.innerText = "george s. mcgovern";
                     document.getElementById("buttonContainer").appendChild(button);
                     button.addEventListener("click", function (e) {
-                        this.parentNode.removeChild(this);
+                        window.setInterval(endSession, 1000);
                     });
                     let buttonContainer = document.getElementById("buttonContainer");
                     buttonContainer.insertBefore(button, buttonContainer.childNodes[2]);
@@ -244,6 +248,7 @@ function initiateRun() {
     button.style.position = "absolute";
     button.style.transition = "none";
 }
+// Violently wiggle the button around.
 function buttonMove () {
     let button = document.getElementById("mcgovern");
     let buttonRect = button.getBoundingClientRect();
@@ -261,6 +266,7 @@ function buttonMove () {
         button.style.top = 0 + "px";
     }
 }
+// Stop the button from darting around.
 function pauseRun(e) {
     let button = document.getElementById("mcgovern");
     button.style.transition = "all 0.1s";
@@ -270,8 +276,16 @@ function pauseRun(e) {
     button.style.left = e.clientX + "px"
     button.style.top = e.clientY + "px";
 }
+// Reset the darting button.
 function endRun() {
     let button = document.getElementById("mcgovern");
     button.removeEventListener("click", endRun);
     button.style = "";
+}
+
+// Finish voting session and return to the home screen.
+function endSession() {
+    window.clearInterval(0);
+    window.clearInterval(1);
+    this.parentNode.removeChild(this);
 }
