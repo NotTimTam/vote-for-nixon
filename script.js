@@ -1,16 +1,16 @@
+"use strict";
+
 window.onload = function() {
     images.innerHTML = `
     <img src="images/portrait_mcgovern.png" alt="mcgovern portrait" id="portrait_mcgovern">
     <img src="images/portrait_nixon.png" alt="nixon portrait" id="portrait_nixon">
     `
-    document.getElementById("portrait_nixon").addEventListener("click", function (e) {
-        this.src = "images/nixonmad1.png";
-    });
 }
 
 // Context Menu
 document.addEventListener('contextmenu', function (e) {
     e.preventDefault();
+    console.log("Ironic, we didn't find the context...");
 });
 
 // Cursor
@@ -47,7 +47,7 @@ function flipMachine() {
 }
 
 // Remove flip animation from booth.
-transitionEndCallback = (e) => {
+function transitionEndCallback(e) {
     booth.removeEventListener("animationend", transitionEndCallback);
     booth.classList.remove("flip");
 }
@@ -238,7 +238,8 @@ function itsGoofyTime() {
 function initiateRun() {
     window.setInterval(buttonMove, 1);
     let button = document.getElementById("mcgovern");
-    button.addEventListener("mouseover", endRun);
+    button.addEventListener("mouseover", pauseRun);
+    button.addEventListener("click", endRun);
 
     button.style.position = "absolute";
     button.style.transition = "none";
@@ -247,6 +248,8 @@ function buttonMove () {
     let button = document.getElementById("mcgovern");
     let buttonRect = button.getBoundingClientRect();
     let boothRect = booth.getBoundingClientRect();
+
+    console.log("im still runnin'")
 
     // Move the button right, as well as up or down, and make sure to loop it around the screen.
     button.style.left = buttonRect.left + 15 + "px";
@@ -260,11 +263,17 @@ function buttonMove () {
         button.style.top = 0 + "px";
     }
 }
-function endRun() {
-    window.clearInterval(0);
+function pauseRun(e) {
     let button = document.getElementById("mcgovern");
-    button.style = "";
-    document.getElementById("secretText").remove();
-    button.removeEventListener("mouseover", endRun);
     button.style.transition = "all 0.1s";
+    window.clearInterval(0);
+    window.clearInterval(1);
+    button.removeEventListener("mouseover", pauseRun);
+    button.style.left = e.clientX + "px"
+    button.style.top = e.clientY + "px";
+}
+function endRun() {
+    let button = document.getElementById("mcgovern");
+    button.removeEventListener("click", endRun);
+    button.style = "";
 }
