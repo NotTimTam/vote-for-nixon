@@ -206,7 +206,7 @@ function itsGoofyTime() {
                     button.innerText = "george s. mcgovern";
                     document.getElementById("buttonContainer").appendChild(button);
                     button.addEventListener("click", function (e) {
-                        window.setInterval(endSession, 1000);
+                        this.parentNode.removeChild(this);
                     });
                 } else {
                     let button = document.createElement("div");
@@ -216,7 +216,7 @@ function itsGoofyTime() {
                     button.innerText = "george s. mcgovern";
                     document.getElementById("buttonContainer").appendChild(button);
                     button.addEventListener("click", function (e) {
-                        window.setInterval(endSession, 1000);
+                        this.parentNode.removeChild(this);
                     });
                     let buttonContainer = document.getElementById("buttonContainer");
                     buttonContainer.insertBefore(button, buttonContainer.childNodes[2]);
@@ -281,11 +281,4 @@ function endRun() {
     let button = document.getElementById("mcgovern");
     button.removeEventListener("click", endRun);
     button.style = "";
-}
-
-// Finish voting session and return to the home screen.
-function endSession() {
-    window.clearInterval(0);
-    window.clearInterval(1);
-    this.parentNode.removeChild(this);
 }
