@@ -280,9 +280,8 @@ img {
     cursor: none;
 
     margin: 0 auto;
-
-    width: min-content;
     font-size: 16px;
+    width: 50%;
 
     display: block;
     margin-top: 25%;
