@@ -249,8 +249,6 @@ function buttonMove () {
     let buttonRect = button.getBoundingClientRect();
     let boothRect = booth.getBoundingClientRect();
 
-    console.log("im still runnin'")
-
     // Move the button right, as well as up or down, and make sure to loop it around the screen.
     button.style.left = buttonRect.left + 15 + "px";
     button.style.top = buttonRect.top + (Math.floor(Math.random() * (15 - -15 +1)) + -15) + "px";
