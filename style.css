@@ -283,10 +283,13 @@ img {
     transition: all 0.3s;
 
     border-bottom: 3px solid gray;
+    color: gray;
 }
 #name:hover {
     border-bottom: 3px solid black;
+    color: black;
 }
 #name:focus {
     border-bottom: 3px solid dodgerblue;
+    color: dodgerblue;
 }
